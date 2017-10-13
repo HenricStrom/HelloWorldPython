@@ -17,6 +17,16 @@ class AuthorizedRequest:
 
         return response.json()
 
+    def post(self, url, headers: dict=None, **kwargs):
+        if self.access_token is None or self._access_token_has_expired():
+            self.access_token, self.refresh_token, self.token_creation_time = _update_access_token()
+
+        headers = self._add_token_header(headers)
+
+        response = requests.post(url, headers=headers, **kwargs)
+
+        return response.json()
+
     def _access_token_has_expired(self):
         return (datetime.now() - self.token_creation_time) > timedelta(hours=1)
 
