@@ -6,7 +6,7 @@ from hello_world.supplier_invoice import SupplierInvoice
 
 def get_supplier_invoices() -> List[SupplierInvoice]:
     authorized_request = AuthorizedRequest()
-    response = authorized_request.get("https://eaccountingapi-sandbox.test.vismaonline.com/v2/supplierinvoices")
+    response = authorized_request.get("https://eaccountingapi-sandbox.test.vismaonline.com/v2/supplierinvoicedrafts")
 
     raw_supplier_invoices = response['Data']
 
